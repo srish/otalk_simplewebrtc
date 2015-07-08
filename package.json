@@ -1,9 +1,8 @@
 {
-  "name": "webrtc",
-  "version": "0.0.1",
-  "dependencies": {
-    "foobar": "^1.1.0",
-    "http": "0.1.x",
-    "node-static": "0.1.x"
-  }
+	"name": "otalkk",
+	"version": "0.0.1", 
+	"dependencies": {
+		"http": "0.0.0",
+		"node-static": "0.5.6"
+	}
 }
