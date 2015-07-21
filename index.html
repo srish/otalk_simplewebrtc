@@ -2,71 +2,45 @@
 <html>
     <head>
         <script src="https://simplewebrtc.com/latest.js"></script> 
-        <link rel="stylesheet" type="text/css" href="style.css">
+        <link rel="stylesheet" type="text/css" href="css/style.css">
+
+        <!-- Latest compiled and minified CSS -->
+		<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css">
+
+		<!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
+    	<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
+
+		<!-- Latest compiled and minified JavaScript -->
+		<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/js/bootstrap.min.js"></script>
+
     </head>
     <body>
-	<h3>OTalk SimpleWebRTC Demo</h3>
-        <div class="localVideo" id="localVideo" muted></div>
 
-        <div class="remoteVideo" id="remoteVideo"></div>
+		<div class="container">
+			
+			<div class="col-lg-12">
+				<h3> OTalk SimpleWebRTC Demo </h3>
+			</div>
 
-    <script>
-	var webrtc = new SimpleWebRTC({
-	    // the id/ element dom element that will hold our video
-	    localVideoEl: 'localVideo',
-	    // the id/ element dom element that will hold remote videos
+			<div class="col-lg-9 localVideoContainer">
+				<div class="localVideo" id="localVideo" muted>
+				</div>
+			
+				<div class="videoControls"> 
+		        	<button type="button" class="btn btn-default btn-primary btn-volume-down">
+		        		<span id="glyph-volume" class="glyphicon glyphicon-volume-down"></span> 
+		        	</button>
+		        </div>
 
-	    // the documentation says that in order to wrap the video element 
-	    // in a container we need to supress adding them to the remote video 
-	    // container and instead pass an empty string 
+			</div>	
 
-	    remoteVideosEl: '', //empty string 
-	    // immediately ask for camera access
-	    autoRequestMedia: true
-	});
+			<div class="col-lg-3 remoteVideoContainer">
+				<div class="remoteVideo" id="remoteVideo"></div> 
+			</div>
 
-	// when a peer video has been added 
+		</div>
 
-	webrtc.on('videoAdded', function(video, peer) {
-		console.log('video added', peer);
+    <script src="webrtc.js"></script>
 
-		var remotes = document.getElementById('remoteVideo');
-
-		if(remotes) {
-			var container = document.createElement('div');
-
-			container.className = 'videoContainer';
-
-			container.id = 'container_' + webrtc.getDomId(peer);
-
-			container.appendChild(video);
-
-			// suppress contextmenu
-
-			video.oncontextmenu = function() {
-				return false;
-			};
-
-			remotes.appendChild(container);
-		}
-	});
-
-	// a peer video was removed
-	webrtc.on('videoRemoved', function (video, peer) {
-	    console.log('video removed ', peer);
-	    var remotes = document.getElementById('remoteVideo');
-	    var el = document.getElementById(peer ? 'container_' + webrtc.getDomId(peer) : 'localScreenContainer');
-	    if (remotes && el) {
-	        remotes.removeChild(el);
-	    }
-	});
-
-	//we have to wait until it's ready
-	webrtc.on('readyToCall', function() {
-		// you can name it anything
-		webrtc.joinRoom('your awesome room name');
-	});
-
-    </script>
     </body>
 </html>
