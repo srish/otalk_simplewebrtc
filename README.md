@@ -9,4 +9,4 @@ Installation
 Demo Page
 ===
 
-* Git clone the repository https://otalkk.herokuapp.com
+* Otalk Simplewebrtc Demo https://otalkk.herokuapp.com
